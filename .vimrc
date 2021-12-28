@@ -1,4 +1,4 @@
-" vim-bootstrap 2021-03-11 22:19:54
+" vim-bootstrap 2021-12-28 19:49:08
 
 "*****************************************************************************
 "" Vim-Plug core
@@ -10,7 +10,7 @@ else
   let curl_exists=expand('curl')
 endif
 
-let g:vim_bootstrap_langs = "elixir,php,python"
+let g:vim_bootstrap_langs = "html,javascript,php,python"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 let g:vim_bootstrap_theme = "molokai"
 let g:vim_bootstrap_frams = ""
@@ -76,9 +76,17 @@ Plug 'honza/vim-snippets'
 "" Custom bundles
 "*****************************************************************************
 
-" elixir
-Plug 'elixir-lang/vim-elixir'
-Plug 'carlosgaldino/elixir-snippets'
+" html
+"" HTML Bundle
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gko/vim-coloresque'
+Plug 'tpope/vim-haml'
+Plug 'mattn/emmet-vim'
+
+
+" javascript
+"" Javascript Bundle
+Plug 'jelera/vim-javascript-syntax'
 
 
 " php
@@ -139,8 +147,6 @@ set smartcase
 
 set fileformats=unix,dos,mac
 
-set splitright
-
 if exists('$SHELL')
     set shell=$SHELL
 else
@@ -163,6 +169,12 @@ set number
 let no_buffers_menu=1
 colorscheme molokai
 
+
+" Better command line completion 
+set wildmenu
+
+" mouse support
+set mouse=a
 
 set mousemodel=popup
 set t_Co=256
@@ -201,6 +213,9 @@ endif
 
 
 "" Disable the blinking cursor.
+set gcr=a:blinkon0
+
+set scrolloff=3
 
 
 "" Status bar
@@ -250,13 +265,13 @@ cnoreabbrev Qall qall
 
 "" NERDTree configuration
 let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeIgnore=['node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
@@ -327,13 +342,13 @@ noremap <Leader>v :<C-u>vsplit<CR>
 
 "" Git
 noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
+noremap <Leader>gc :Git commit --verbose<CR>
+noremap <Leader>gsh :Git push<CR>
+noremap <Leader>gll :Git pull<CR>
+noremap <Leader>gs :Git<CR>
+noremap <Leader>gb :Git blame<CR>
+noremap <Leader>gd :Gvdiffsplit<CR>
+noremap <Leader>gr :GRemove<CR>
 
 " session management
 nnoremap <leader>so :OpenSession<Space>
@@ -446,7 +461,19 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "" Custom configs
 "*****************************************************************************
 
-" elixir
+" html
+" for html files, 2 spaces
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+
+
+" javascript
+let g:javascript_enable_domhtmlcss = 1
+
+" vim-javascript
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
+augroup END
 
 
 " php
@@ -459,9 +486,9 @@ nmap <Leader>mm :call phpactor#ContextMenu()<CR>
 nmap <Leader>nn :call phpactor#Navigate()<CR>
 " Goto definition of class or class member under the cursor
 nmap <Leader>oo :call phpactor#GotoDefinition()<CR>
-nmap <Leader>oh :call phpactor#GotoDefinitionHsplit()<CR>
-nmap <Leader>ov :call phpactor#GotoDefinitionVsplit()<CR>
-nmap <Leader>ot :call phpactor#GotoDefinitionTab()<CR>
+nmap <Leader>oh :call phpactor#GotoDefinition('hsplit')<CR>
+nmap <Leader>ov :call phpactor#GotoDefinition('vsplit')<CR>
+nmap <Leader>ot :call phpactor#GotoDefinition('tabnew')<CR>
 " Show brief information about the symbol under the cursor
 nmap <Leader>K :call phpactor#Hover()<CR>
 " Transform the classes in the current file
