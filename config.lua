@@ -9,10 +9,6 @@ lvim.colorscheme = "onedarker"
 lvim.leader = "space"
 
 lvim.keys.normal_mode = {
-  ["<S-L>"] = false,
-  ["<S-H>"] = false,
-  ["<S-J>"] = ":BufferNext<CR>",
-  ["<S-K>"] = ":BufferPrevious<CR>",
   ["<C-S>"] = ":w<CR>",
 }
 
