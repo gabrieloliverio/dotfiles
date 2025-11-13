@@ -1,0 +1,31 @@
+[
+  {
+    "context": "Workspace && vim_mode == normal",
+    "bindings": {
+      "space f": "file_finder::Toggle",
+      "space e": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "H": "vim::GoToPreviousTab",
+      "L": "vim::GoToTab",
+      "J": "terminal_panel::ToggleFocus",
+      "|": "pane::SplitVertical",
+      "escape": "workspace::Save",
+
+      "ctrl h": "project_panel::ToggleFocus",
+      "ctrl l": "editor::ToggleFocus",
+
+      "space f f": "file_finder::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space c": "pane::CloseActiveItem",
+      "space C": "pane::CloseAllItems",
+      "space t r": "task::Rerun",
+      "space t s": "task::Spawn"
+    }
+  }
+]
+
+
