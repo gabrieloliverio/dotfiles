@@ -3,8 +3,17 @@
     "context": "Workspace && vim_mode == normal",
     "bindings": {
       "space f": "file_finder::Toggle",
-      "space e": "project_panel::ToggleFocus"
-    }
+      "space e": "project_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space e": "project_panel::ToggleFocus",
+      "space l": "workspace::ActivatePaneRight",
+      "a": "project_panel::NewFile",
+      "d": "project_panel::NewDirectory",
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
@@ -14,18 +23,29 @@
       "J": "terminal_panel::ToggleFocus",
       "|": "pane::SplitVertical",
       "escape": "workspace::Save",
+      "space w": "workspace::Save",
+      "space n": "workspace::NewFile",
 
       "ctrl h": "project_panel::ToggleFocus",
       "ctrl l": "editor::ToggleFocus",
 
       "space f f": "file_finder::Toggle",
+      "space f h": "buffer_search::Dismiss",
+
       "space e": "project_panel::ToggleFocus",
       "space c": "pane::CloseActiveItem",
       "space C": "pane::CloseAllItems",
+
       "space t r": "task::Rerun",
-      "space t s": "task::Spawn"
-    }
-  }
+      "space t s": "task::Spawn",
+      // "space t": "workspace::ToggleBottomDock",
+
+      "space h": "workspace::ActivatePaneLeft",
+      "space l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {},
+  },
 ]
-
-
